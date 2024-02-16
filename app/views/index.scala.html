@@ -1,0 +1,31 @@
+@import helper._
+
+@this()
+@(pokemonData: Option[PokemonSearchModel] = None, pokemonName: Option[String] = None, notFound: Boolean = false)(implicit messages: Messages, request: Request[_])
+
+<html>
+    <body>
+        
+        <h1>@messages("index.title")</h1>
+        
+        @if(notFound) {
+            <h2>@messages("index.notFound")</h2>
+        }
+        
+        @helper.form(routes.PokemonSearchController.search()) {
+            @CSRF.formField
+            <label for="pokemon-name">@messages("index.input.label")</label>
+            <input type="text" name="pokemon-name" id="pokemon-name" value="@{pokemonName.getOrElse("")}">
+            <input type="submit">
+        }
+        
+        @pokemonData.map { data =>
+            <h2>@{data.name}</h2><br>
+            <img src="@{data.frontSpriteUrl}">
+            <p>
+                @{data.typing.mkString("Type: ", ", ", "")}
+            </p>
+        }
+        
+    </body>
+</html>

@@ -1,0 +1,5 @@
+# https://www.playframework.com/documentation/latest/ScalaI18N
+
+index.title = Pokémon Search Engine (kinda, maybe)
+index.input.label = Enter Pokémon name
+index.notFound = Could not find the Pokémon
